@@ -210,6 +210,6 @@ npm run dev
 
 ## İletişim
 
-Proje Sahibi - [@github_CotNeo](https://github.com/kullCotNeoanici)
+Proje Sahibi - [@github_CotNeo](https://github.com/CotNeo)
 
 Proje Linki: [https://github.com/CotNeo/hubx-sozluk](https://github.com/kCotNeo/hubx-sozluk) 
