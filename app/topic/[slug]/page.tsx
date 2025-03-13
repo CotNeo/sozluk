@@ -1,17 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import EntryCard from '../../components/EntryCard';
 import EntryForm from '../../components/EntryForm';
-
-interface TopicPageProps {
-  params: {
-    slug: string;
-  };
-}
 
 interface TopicAuthor {
   _id: string;
@@ -104,7 +99,8 @@ const mockEntries: Entry[] = [
   },
 ];
 
-export default function TopicPage({ params }: TopicPageProps) {
+export default function TopicPage(): ReactNode {
+  const params = useParams();
   const [topic, setTopic] = useState<Topic | null>(null);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [isLoading, setIsLoading] = useState(true);

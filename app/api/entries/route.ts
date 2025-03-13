@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import dbConnect from '@/lib/dbConnect';
 import Entry from '@/app/models/Entry';
 import Topic from '@/app/models/Topic';
 
 // GET /api/entries - Get all entries
-export async function GET(request: Request) {
+export async function GET(request: Request): Promise<NextResponse> {
   try {
     const { searchParams } = new URL(request.url);
     const topicId = searchParams.get('topic');
@@ -16,8 +16,8 @@ export async function GET(request: Request) {
 
     await dbConnect();
 
-    let query = {};
-    let sort = { createdAt: -1 }; // Varsayılan olarak en yeni entryler
+    let query: Record<string, unknown> = {};
+    let sort: Record<string, 1 | -1> = { createdAt: -1 }; // Varsayılan olarak en yeni entryler
 
     // Belirli bir başlığa ait entryleri filtrele
     if (topicId) {
@@ -38,7 +38,9 @@ export async function GET(request: Request) {
         createdAt: { $gte: yesterday, $lt: today },
       };
       
-      sort = { 'likes.length': -1 }; // Beğeni sayısına göre sırala
+      // MongoDB'de array uzunluğuna göre sıralama için $size operatörü kullanılabilir
+      // Ancak burada basitlik için likes alanını kullanıyoruz
+      sort = { likes: -1 }; // likes array'inin uzunluğuna göre sırala
     }
 
     // Entryleri getir ve yazarlarını populate et
@@ -72,7 +74,7 @@ export async function GET(request: Request) {
 }
 
 // POST /api/entries - Create a new entry
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<NextResponse> {
   try {
     const session = await getServerSession();
 

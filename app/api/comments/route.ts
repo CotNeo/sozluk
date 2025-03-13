@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import dbConnect from '@/lib/dbConnect';
 import Comment from '@/app/models/Comment';
 import Entry from '@/app/models/Entry';
 
 // GET /api/comments - Get all comments
-export async function GET(request: Request) {
+export async function GET(request: Request): Promise<NextResponse> {
   try {
     const { searchParams } = new URL(request.url);
     const entryId = searchParams.get('entryId');
@@ -61,7 +61,7 @@ export async function GET(request: Request) {
 }
 
 // POST /api/comments - Create a new comment
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<NextResponse> {
   try {
     const session = await getServerSession();
 

@@ -1,63 +1,20 @@
-import { NextRequest } from 'next/server';
-import { Server as SocketIOServer } from 'socket.io';
-import { Server as NetServer } from 'http';
-import { NextApiResponse } from 'next';
-
-// Store the socket.io server instance
-let io: SocketIOServer | null = null;
-
-export async function GET(req: NextRequest, res: NextApiResponse) {
-  if (!io) {
-    // Create a new socket.io server if one doesn't exist
-    const httpServer: NetServer = (res as any).socket.server;
-    io = new SocketIOServer(httpServer, {
-      path: '/api/socketio',
-      addTrailingSlash: false,
-    });
-
-    // Socket.io event handlers
-    io.on('connection', (socket) => {
-      console.log('Client connected:', socket.id);
-
-      // Handle new entry events
-      socket.on('new_entry', (data) => {
-        socket.broadcast.emit('new_entry', data);
-      });
-
-      // Handle new comment events
-      socket.on('new_comment', (data) => {
-        socket.broadcast.emit('new_comment', data);
-      });
-
-      // Handle new like events
-      socket.on('new_like', (data) => {
-        socket.broadcast.emit('new_like', data);
-      });
-
-      // Handle entry update events
-      socket.on('entry_updated', (data) => {
-        socket.broadcast.emit('entry_updated', data);
-      });
-
-      // Handle comment update events
-      socket.on('comment_updated', (data) => {
-        socket.broadcast.emit('comment_updated', data);
-      });
-
-      // Handle topic update events
-      socket.on('topic_updated', (data) => {
-        socket.broadcast.emit('topic_updated', data);
-      });
-
-      // Handle disconnection
-      socket.on('disconnect', () => {
-        console.log('Client disconnected:', socket.id);
-      });
-    });
-  }
-
-  // Return a response to keep the connection alive
-  return new Response('Socket.io server is running', {
-    status: 200,
-  });
+// App Router API route handler
+export async function GET(): Promise<Response> {
+  // App Router API routes don't have direct access to the underlying HTTP server
+  // This is a limitation in the current App Router implementation
+  // For Socket.io, you should use the Pages Router API routes instead
+  
+  // Return a response explaining the situation
+  return new Response(
+    JSON.stringify({
+      message: 'Socket.io server cannot be initialized in App Router API routes. Please use Pages Router API routes instead.',
+      documentation: 'https://nextjs.org/docs/pages/building-your-application/routing/api-routes'
+    }),
+    {
+      status: 501,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  );
 } 

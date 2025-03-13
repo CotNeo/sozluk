@@ -3,9 +3,6 @@ import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 import { tr } from 'date-fns/locale';
 import ReactMarkdown from 'react-markdown';
-import { IEntry } from '../models/Entry';
-import { IUser } from '../models/User';
-import { ITopic } from '../models/Topic';
 
 // MongoDB Document tiplerini kullanmak yerine daha basit tipler tanımlayalım
 interface SimpleUser {

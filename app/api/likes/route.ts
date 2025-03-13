@@ -4,7 +4,7 @@ import dbConnect from '@/lib/dbConnect';
 import Entry from '@/app/models/Entry';
 
 // Beğeni ekle
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<NextResponse> {
   try {
     const session = await getServerSession();
 
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
 }
 
 // Beğeni kaldır
-export async function DELETE(request: Request) {
+export async function DELETE(request: Request): Promise<NextResponse> {
   try {
     const session = await getServerSession();
 

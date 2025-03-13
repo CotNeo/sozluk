@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import dbConnect from '@/lib/dbConnect';
 import User from '@/app/models/User';
 
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<NextResponse> {
   try {
     const { username, email, password, displayName } = await request.json();
 

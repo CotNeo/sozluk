@@ -13,7 +13,7 @@ interface CommentCardProps {
 
 const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(comment.likes?.length || 0);
+  const [likeCount, setLikeCount] = useState(0);
 
   const handleLike = async () => {
     try {
@@ -45,9 +45,6 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
           <span className="text-gray-500 text-sm ml-2">
             {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true, locale: tr })}
           </span>
-          {comment.isEdited && (
-            <span className="text-gray-500 text-xs ml-2">(düzenlendi)</span>
-          )}
         </div>
       </div>
 

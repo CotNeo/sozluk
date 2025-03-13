@@ -5,7 +5,7 @@ interface EntryFormProps {
   onSuccess?: () => void;
 }
 
-const EntryForm: React.FC<EntryFormProps> = ({ topicId, onSuccess }) => {
+const EntryForm: React.FC<EntryFormProps> = ({ onSuccess }) => {
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -13,14 +13,14 @@ const EntryForm: React.FC<EntryFormProps> = ({ topicId, onSuccess }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (content.trim().length < 10) {
-      setError('Entry en az 10 karakter olmalıdır.');
+    if (!content.trim()) {
+      setError('Entry içeriği boş olamaz.');
       return;
     }
-    
+
     setIsSubmitting(true);
     setError(null);
-    
+
     try {
       // In a real app, we would send data to the API
       // const response = await fetch('/api/entries', {
@@ -38,14 +38,14 @@ const EntryForm: React.FC<EntryFormProps> = ({ topicId, onSuccess }) => {
       //   const errorData = await response.json();
       //   throw new Error(errorData.message || 'Entry oluşturulurken bir hata oluştu.');
       // }
-      
+
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Clear form
       setContent('');
       
-      // Call success callback
+      // Call success callback if provided
       if (onSuccess) {
         onSuccess();
       }

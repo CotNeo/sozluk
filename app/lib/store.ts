@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { ITopic } from '../models/Topic';
 import { IEntry } from '../models/Entry';
 import { IComment } from '../models/Comment';
-import { IUser } from '../models/User';
 
 interface User {
   id: string;

@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-export default function CreateTopicPage() {
+export default function CreateTopicPage(): ReactNode {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');

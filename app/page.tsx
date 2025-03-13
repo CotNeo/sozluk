@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { ReactNode } from 'react';
 
-export default function Home() {
+export default function Home(): ReactNode {
   return (
     <main className="min-h-screen flex flex-col bg-background">
       <Header />
@@ -123,7 +124,7 @@ export default function Home() {
                   {Array.from({ length: 3 }).map((_, index) => (
                     <li key={index} className="border-b border-gray-100 pb-2 last:border-0 last:pb-0">
                       <Link href={`/topic/${index + 20}`} className="block hover:text-primary transition-colors">
-                        <span className="font-medium">dünün en beğenilen entry'si {index + 1}</span>
+                        <span className="font-medium">dünün en beğenilen entry&apos;si {index + 1}</span>
                         <div className="flex items-center text-xs text-gray-500 mt-1">
                           <span className="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">

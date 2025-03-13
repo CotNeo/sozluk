@@ -1,17 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import EntryCard from '../../components/EntryCard';
 import CommentSection from '../../components/CommentSection';
-
-interface EntryPageProps {
-  params: {
-    id: string;
-  };
-}
 
 interface EntryAuthor {
   _id: string;
@@ -60,7 +55,8 @@ const mockEntry: Entry = {
   }
 };
 
-export default function EntryPage({ params }: EntryPageProps) {
+export default function EntryPage(): ReactNode {
+  const params = useParams();
   const [entry, setEntry] = useState<Entry | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -73,9 +69,12 @@ export default function EntryPage({ params }: EntryPageProps) {
         // In a real app, we would fetch the entry from the API
         // const response = await fetch(`/api/entries/${params.id}`);
         // const data = await response.json();
-        // setEntry(data);
+        // setEntry(data.entry);
 
         // For now, we'll use mock data
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Mock entry data
         setEntry(mockEntry);
       } catch (err) {
         console.error('Error fetching entry:', err);

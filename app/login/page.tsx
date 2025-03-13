@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-export default function LoginPage() {
+export default function LoginPage(): ReactNode {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);

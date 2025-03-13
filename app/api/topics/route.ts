@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import dbConnect from '@/lib/dbConnect';
 import Topic from '@/app/models/Topic';
 import Entry from '@/app/models/Entry';
 
 // GET /api/topics - Get all topics
-export async function GET(request: Request) {
+export async function GET(request: Request): Promise<NextResponse> {
   try {
     const { searchParams } = new URL(request.url);
     const popular = searchParams.get('popular');
@@ -17,7 +17,7 @@ export async function GET(request: Request) {
     await dbConnect();
 
     let query = {};
-    let sort = { createdAt: -1 }; // Varsayılan olarak en yeni başlıklar
+    let sort: { [key: string]: 1 | -1 } = { createdAt: -1 }; // Varsayılan olarak en yeni başlıklar
 
     // Popüler başlıkları filtrele
     if (popular === 'true') {
@@ -62,7 +62,7 @@ export async function GET(request: Request) {
 }
 
 // POST /api/topics - Create a new topic
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<NextResponse> {
   try {
     const session = await getServerSession();
 
