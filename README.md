@@ -206,10 +206,12 @@ npm run dev
 4. Dalınıza push edin (`git push origin feature/amazing-feature`)
 5. Bir Pull Request açın
 
-
-
 ## İletişim
 
 Proje Sahibi - [@github_CotNeo](https://github.com/CotNeo)
 
 Proje Linki: [https://github.com/CotNeo/hubx-sozluk](https://github.com/kCotNeo/hubx-sozluk) 
+
+## Lisans
+
+Bu proje MIT Lisansı altında lisanslanmıştır - Detaylar için [LICENSE](LICENSE) dosyasına bakınız. 
